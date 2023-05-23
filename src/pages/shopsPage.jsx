@@ -6,6 +6,19 @@ export const ShopsPage = () => {
   const [shops, setShops] = useState([]);
   const [selectedShop, setSelectedShop] = useState(null);
 
+  const addToCart = (shop, product) => {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let foundProduct = cart.find((item) => item.id === product.id);
+
+    if (foundProduct) {
+      foundProduct.quantity++;
+    } else {
+      cart.push({ shop, ...product, quantity: 1 });
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+  };
+
   useEffect(() => {
     try {
       const fetchShops = async () => {
@@ -40,7 +53,9 @@ export const ShopsPage = () => {
                 <h3>{product.name}</h3>
                 <img src={product.imageUrl} alt={product.name}></img>
                 <p>{product.description}</p>
-                <button>add to HyperCart</button>
+                <button onClick={() => addToCart(selectedShop.name, product)}>
+                  add to HyperCart
+                </button>
               </div>
             ))}
           </div>
