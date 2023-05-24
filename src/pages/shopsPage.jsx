@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { AddShoppingCart, RemoveShoppingCart } from '@mui/icons-material';
 import styled from '@emotion/styled';
+import { toast } from 'react-toastify';
 
 const Container = styled(Box)`
   display: flex;
@@ -50,7 +51,6 @@ const ProductCard = styled(Card)`
 export const ShopsPage = () => {
   const [shops, setShops] = useState([]);
   const selectedShop = useSelector((state) => state.shop.selectedShop);
-
   const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
@@ -67,6 +67,10 @@ export const ShopsPage = () => {
   }, []);
 
   const handleAddToCart = (product) => {
+    if (cartItems.length > 0 && cartItems[0].shop !== selectedShop.name) {
+      toast.warn('Сomplete the current order, please 😊 ');
+      return;
+    }
     dispatch(
       addToCart({
         shop: selectedShop.name,
