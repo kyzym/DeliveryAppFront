@@ -85,6 +85,7 @@ export const ShoppingCartPage = () => {
         <div key={item.id}>
           <img src={item.imageUrl} alt={item.name} />
           <h2>{item.name}</h2>
+          <p>{item.price}</p>
           <input
             type="number"
             value={item.quantity}
