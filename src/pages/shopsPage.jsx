@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { addToCart, removeFromCart } from '../redux/cart/cartSlice';
+import { selectShop } from '../redux/shop/shopSlice';
 import {
   Card,
   CardContent,
@@ -48,8 +49,9 @@ const ProductCard = styled(Card)`
 
 export const ShopsPage = () => {
   const [shops, setShops] = useState([]);
-  const [selectedShop, setSelectedShop] = useState(null);
-  const [addedProducts, setAddedProducts] = useState([]);
+  const selectedShop = useSelector((state) => state.shop.selectedShop);
+
+  const cartItems = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -72,12 +74,10 @@ export const ShopsPage = () => {
         quantity: 1,
       })
     );
-    setAddedProducts([...addedProducts, product.id]);
   };
 
   const handleRemoveFromCart = (product) => {
     dispatch(removeFromCart(product));
-    setAddedProducts(addedProducts.filter((id) => id !== product.id));
   };
 
   return (
@@ -87,14 +87,19 @@ export const ShopsPage = () => {
           Shops
         </Typography>
         {shops.map((shop) => (
-          <ShopCard key={shop.id}>
+          <ShopCard
+            key={shop.id}
+            style={{
+              backgroundColor:
+                selectedShop && selectedShop.id === shop.id ? '#cfe8fc' : '',
+            }}>
             <CardContent>
               <Typography variant="h5" gutterBottom>
                 {shop.name}
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size="small" onClick={() => setSelectedShop(shop)}>
+              <Button size="small" onClick={() => dispatch(selectShop(shop))}>
                 View Products
               </Button>
             </CardActions>
@@ -125,7 +130,7 @@ export const ShopsPage = () => {
                 <Typography mt={1}>{product.description}</Typography>
               </CardContent>
               <CardActions>
-                {!addedProducts.includes(product.id) ? (
+                {!cartItems.some((item) => item.id === product.id) ? (
                   <IconButton
                     aria-label="add to cart"
                     onClick={() => handleAddToCart(product)}>

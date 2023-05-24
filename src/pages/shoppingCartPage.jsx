@@ -9,6 +9,16 @@ import {
   updateQuantity,
 } from '../redux/cart/cartSlice';
 
+import {
+  TextField,
+  IconButton,
+  Button,
+  Card,
+  Box,
+  Typography,
+} from '@mui/material';
+import { Add, Remove, Delete } from '@mui/icons-material';
+
 export const ShoppingCartPage = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
@@ -51,49 +61,96 @@ export const ShoppingCartPage = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Phone"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-        />
-        <input
-          type="text"
-          placeholder="Address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-        <button type="submit">Submit</button>
-      </form>
-
-      <h1>ShoppingCart</h1>
-      {cart.map((item) => (
-        <div key={item.id}>
-          <img src={item.imageUrl} alt={item.name} />
-          <h2>{item.name}</h2>
-          <p>{item.price}</p>
-          <input
-            type="number"
-            value={item.quantity}
-            onChange={(e) => handleUpdateQuantity(item, Number(e.target.value))}
+    <Box sx={{ m: 3, display: 'flex' }}>
+      <Box sx={{ flexBasis: '30%', marginRight: 2 }}>
+        <Typography variant="h4" mb={2}>
+          Your contacts
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            fullWidth
+            margin="normal"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
-          <button onClick={() => handleRemoveFromCart(item)}>Remove</button>
-        </div>
-      ))}
-    </>
+          <TextField
+            fullWidth
+            margin="normal"
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <TextField
+            fullWidth
+            margin="normal"
+            type="tel"
+            placeholder="Phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <TextField
+            fullWidth
+            margin="normal"
+            placeholder="Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
+          <Button variant="contained" color="primary" type="submit">
+            Submit
+          </Button>
+        </form>
+      </Box>
+
+      <Box sx={{ flexBasis: '70%' }}>
+        <Typography variant="h4" mb={2}>
+          Shopping Cart
+        </Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+          }}>
+          {cart.map((item) => (
+            <Card
+              sx={{
+                width: '45%',
+                marginBottom: 2,
+                padding: 2,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+              key={item.id}>
+              <img src={item.imageUrl} alt={item.name} />
+              <Typography variant="h6">{item.name}</Typography>
+              <Typography>${item.price}</Typography>
+              <Box>
+                <IconButton
+                  onClick={() => handleUpdateQuantity(item, item.quantity - 1)}>
+                  <Remove />
+                </IconButton>
+                <TextField
+                  type="number"
+                  value={item.quantity}
+                  onChange={(e) =>
+                    handleUpdateQuantity(item, Number(e.target.value))
+                  }
+                />
+                <IconButton
+                  onClick={() => handleUpdateQuantity(item, item.quantity + 1)}>
+                  <Add />
+                </IconButton>
+              </Box>
+              <IconButton onClick={() => handleRemoveFromCart(item)}>
+                <Delete color="error" />
+              </IconButton>
+            </Card>
+          ))}
+        </Box>
+      </Box>
+    </Box>
   );
 };

@@ -18,7 +18,7 @@ const Link = styled(RouterLink)({
 });
 
 export const Navbar = () => {
-  const cartItemCount = useSelector((state) => state.cart.length); // Замените на правильный путь к общему количеству товаров в вашем хранилище.
+  const cartItemCount = useSelector((state) => state.cart.length);
 
   return (
     <AppBar position="static">
@@ -26,19 +26,21 @@ export const Navbar = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Delivery-app
         </Typography>
+
         <Button color="inherit">
           <Link to="/">Shops</Link>
         </Button>
-        <Button color="inherit">
-          <Link to="/cart">
-            Shopping Cart
-            <IconButton color="inherit">
-              <Badge badgeContent={cartItemCount} color="secondary">
-                <ShoppingCartIcon />
-              </Badge>
-            </IconButton>
-          </Link>
-        </Button>
+
+        {/* <Button color="inherit"> */}
+        <Link to="/cart">
+          {/* Shopping Cart */}
+          <IconButton color="inherit">
+            <Badge badgeContent={cartItemCount} color="secondary">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
+        </Link>
+        {/* </Button> */}
       </Toolbar>
     </AppBar>
   );
