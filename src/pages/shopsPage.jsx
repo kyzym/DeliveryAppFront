@@ -28,17 +28,21 @@ const ProductContainer = styled(Box)`
   flex-basis: 80%;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const ShopCard = styled(Card)`
   margin-bottom: 16px;
   max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const ProductCard = styled(Card)`
   margin-bottom: 16px;
   max-width: 45%;
+  flex-basis: 450px;
   height: 350px;
 `;
 
