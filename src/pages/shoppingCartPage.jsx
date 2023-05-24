@@ -1,17 +1,26 @@
 import { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  clearCart,
+  loadCart,
+  removeFromCart,
+  updateQuantity,
+} from '../redux/cart/cartSlice';
+
 export const ShoppingCartPage = () => {
-  const [cart, setCart] = useState([]);
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
 
   useEffect(() => {
-    const loadedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCart(loadedCart);
-  }, []);
+    dispatch(loadCart());
+  }, [dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,29 +39,15 @@ export const ShoppingCartPage = () => {
     setPhone('');
     setAddress('');
     localStorage.removeItem('cart');
-    setCart([]);
+    dispatch(clearCart());
   };
 
-  const updateQuantity = (product, quantity) => {
-    setCart((prevCart) => {
-      const updatedCart = [...prevCart];
-      const foundProduct = updatedCart.find((item) => item.id === product.id);
-
-      if (foundProduct) {
-        foundProduct.quantity = quantity;
-      }
-
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-      return updatedCart;
-    });
+  const handleUpdateQuantity = (product, quantity) => {
+    dispatch(updateQuantity({ ...product, quantity }));
   };
 
-  const removeFromCart = (product) => {
-    setCart((prevCart) => {
-      const updatedCart = prevCart.filter((item) => item.id !== product.id);
-      localStorage.setItem('cart', JSON.stringify(updatedCart));
-      return updatedCart;
-    });
+  const handleRemoveFromCart = (product) => {
+    dispatch(removeFromCart(product));
   };
 
   return (
@@ -93,9 +88,9 @@ export const ShoppingCartPage = () => {
           <input
             type="number"
             value={item.quantity}
-            onChange={(e) => updateQuantity(item, Number(e.target.value))}
+            onChange={(e) => handleUpdateQuantity(item, Number(e.target.value))}
           />
-          <button onClick={() => removeFromCart(item)}>Remove</button>
+          <button onClick={() => handleRemoveFromCart(item)}>Remove</button>
         </div>
       ))}
     </>
