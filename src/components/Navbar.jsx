@@ -24,23 +24,20 @@ export const Navbar = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Delivery-app
+          <Link to="/">Delivery-app</Link>
         </Typography>
 
         <Button color="inherit">
           <Link to="/">Shops</Link>
         </Button>
 
-        {/* <Button color="inherit"> */}
         <Link to="/cart">
-          {/* Shopping Cart */}
           <IconButton color="inherit">
             <Badge badgeContent={cartItemCount} color="secondary">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
         </Link>
-        {/* </Button> */}
       </Toolbar>
     </AppBar>
   );

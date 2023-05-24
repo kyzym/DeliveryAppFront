@@ -18,3 +18,13 @@ export const App = () => {
     </BrowserRouter>
   );
 };
+
+/**
+ * TODO:
+ * redux selectors
+ * code modules
+ * save state in local storage because of updating
+ * backend
+ * spinner
+ * different images
+ */
