@@ -18,6 +18,7 @@ import {
   Typography,
 } from '@mui/material';
 import { Add, Remove, Delete } from '@mui/icons-material';
+import axios from 'axios';
 
 export const ShoppingCartPage = () => {
   const dispatch = useDispatch();
@@ -42,6 +43,16 @@ export const ShoppingCartPage = () => {
       address,
       items: cart,
     };
+
+    axios
+      .post('http://localhost:3001/api/orders', order)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
     console.log(order);
 
     setName('');

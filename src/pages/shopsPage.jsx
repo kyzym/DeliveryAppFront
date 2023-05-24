@@ -55,15 +55,16 @@ export const ShopsPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    try {
-      const fetchShops = async () => {
-        const response = await axios.get('shops.json');
-        setShops(response.data);
-      };
-      fetchShops();
-    } catch (error) {
-      console.log(error.message);
-    }
+    const fetchShops = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/api/shops');
+
+        setShops(response.data.result);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchShops();
   }, []);
 
   const handleAddToCart = (product) => {
@@ -90,25 +91,26 @@ export const ShopsPage = () => {
         <Typography variant="h4" mb={2} align="center">
           Shops
         </Typography>
-        {shops.map((shop) => (
-          <ShopCard
-            key={shop.id}
-            style={{
-              backgroundColor:
-                selectedShop && selectedShop.id === shop.id ? '#cfe8fc' : '',
-            }}>
-            <CardContent>
-              <Typography variant="h5" gutterBottom>
-                {shop.name}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small" onClick={() => dispatch(selectShop(shop))}>
-                View Products
-              </Button>
-            </CardActions>
-          </ShopCard>
-        ))}
+        {shops &&
+          shops.map((shop) => (
+            <ShopCard
+              key={shop.id}
+              style={{
+                backgroundColor:
+                  selectedShop && selectedShop.id === shop.id ? '#cfe8fc' : '',
+              }}>
+              <CardContent>
+                <Typography variant="h5" gutterBottom>
+                  {shop.name}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" onClick={() => dispatch(selectShop(shop))}>
+                  View Products
+                </Button>
+              </CardActions>
+            </ShopCard>
+          ))}
       </ShopContainer>
 
       {selectedShop && (
