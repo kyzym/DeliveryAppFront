@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { Link as RouterLink } from 'react-router-dom';
+
 import {
   AppBar,
   Toolbar,
@@ -9,37 +9,36 @@ import {
   IconButton,
 } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import { styled } from '@mui/system';
-
-const Link = styled(RouterLink)({
-  color: 'inherit',
-  textDecoration: 'none',
-  marginLeft: '16px',
-});
+import { StyledLink } from './Navbar.styled';
+import { selectCartContent } from '../../redux/cart/cartSelectors';
 
 export const Navbar = () => {
-  const cartItemCount = useSelector((state) => state.cart.length);
+  const cartItemCount = useSelector(selectCartContent);
 
   return (
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Button color="inherit">
-            <Link to="/">Delivery-app</Link>
+            <StyledLink to="/">Delivery-app</StyledLink>
           </Button>
         </Typography>
 
         <Button color="inherit">
-          <Link to="/">Shops</Link>
+          <StyledLink to="/">Shops</StyledLink>
         </Button>
 
-        <Link to="/cart">
+        <Button color="inherit">
+          <StyledLink to="/history">Order History</StyledLink>
+        </Button>
+
+        <StyledLink to="/cart">
           <IconButton color="inherit">
             <Badge badgeContent={cartItemCount} color="secondary">
               <ShoppingCartIcon />
             </Badge>
           </IconButton>
-        </Link>
+        </StyledLink>
       </Toolbar>
     </AppBar>
   );
