@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, HashRouter } from 'react-router-dom';
 import { ShopsPage } from './pages/shopsPage.jsx';
 import { ShoppingCartPage } from './pages/shoppingCartPage.jsx';
 import { Navbar } from './components/Navbar/Navbar.jsx';
@@ -8,7 +8,7 @@ import { HistoryPage } from './pages/historyPage.jsx';
 
 export const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Navbar />
       <Routes>
         <Route path="/" element={<ShopsPage />} />
@@ -17,6 +17,6 @@ export const App = () => {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <ToastContainer autoClose={2000} />
-    </BrowserRouter>
+    </HashRouter>
   );
 };
