@@ -23,8 +23,6 @@ export const App = () => {
  * TODO:
  * redux selectors
  * code modules
- * save state in local storage because of updating
- * backend
  * spinner
  * different images
  */

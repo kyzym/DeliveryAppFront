@@ -55,6 +55,13 @@ export const ShopsPage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const loadedShop = localStorage.getItem('selectedShop');
+    if (loadedShop) {
+      dispatch(selectShop(JSON.parse(loadedShop)));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
     const fetchShops = async () => {
       try {
         const response = await axios.get('http://localhost:3001/api/shops');
@@ -85,6 +92,11 @@ export const ShopsPage = () => {
     dispatch(removeFromCart(product));
   };
 
+  const handleSelectShop = (shop) => {
+    localStorage.setItem('selectedShop', JSON.stringify(shop));
+    dispatch(selectShop(shop));
+  };
+
   return (
     <Container>
       <ShopContainer>
@@ -105,7 +117,7 @@ export const ShopsPage = () => {
                 </Typography>
               </CardContent>
               <CardActions>
-                <Button size="small" onClick={() => dispatch(selectShop(shop))}>
+                <Button size="small" onClick={() => handleSelectShop(shop)}>
                   View Products
                 </Button>
               </CardActions>
@@ -133,7 +145,8 @@ export const ShopsPage = () => {
                     margin: '0 auto',
                   }}
                 />
-                <Typography mt={1}>{product.description}</Typography>
+                <Typography mt={2}>{product.description}</Typography>
+                <Typography mt={1}>{product.price}</Typography>
               </CardContent>
               <CardActions>
                 {!cartItems.some((item) => item.id === product.id) ? (

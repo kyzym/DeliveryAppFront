@@ -24,7 +24,9 @@ export const Navbar = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <Link to="/">Delivery-app</Link>
+          <Button color="inherit">
+            <Link to="/">Delivery-app</Link>
+          </Button>
         </Typography>
 
         <Button color="inherit">
