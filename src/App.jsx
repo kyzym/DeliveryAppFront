@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { ShopsPage } from './pages/ShopsPage.jsx';
-import { ShoppingCartPage } from './pages/ShoppingCartPage.jsx';
+import { ShopsPage } from './pages/shopsPage.jsx';
+import { ShoppingCartPage } from './pages/shoppingCartPage.jsx';
 import { Navbar } from './components/Navbar/Navbar.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { HistoryPage } from './pages/HistoryPage';
+import { HistoryPage } from './pages/historyPage.jsx';
 
 export const App = () => {
   return (
