@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ShopsPage } from './pages/ShopsPage';
-import { ShoppingCartPage } from './pages/ShoppingCartPage';
+import { ShoppingCartPage } from './pages/ShoppingCartPage.jsx';
 import { Navbar } from './components/Navbar/Navbar';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
