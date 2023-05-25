@@ -6,6 +6,7 @@ import {
   updateQuantity,
 } from '../redux/cart/cartSlice';
 import { useEffect } from 'react';
+import { selectCart } from '../redux/cart/cartSelectors';
 
 export const useCartActions = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export const useCartActions = () => {
 };
 
 export const useTotal = () => {
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector(selectCart);
 
   const total = cart
     .reduce((sum, item) => sum + item.price * item.quantity, 0)

@@ -3,9 +3,10 @@ import { toast } from 'react-toastify';
 import { addToCart, removeFromCart } from '../redux/cart/cartSlice';
 import { selectShop } from '../redux/shop/shopSlice';
 import { useEffect } from 'react';
+import { selectCart } from '../redux/cart/cartSelectors';
 
 export const useHandleCart = (selectedShop, dispatch) => {
-  const cartItems = useSelector((state) => state.cart);
+  const cartItems = useSelector(selectCart);
 
   const handleAddToCart = (product) => {
     if (cartItems.length > 0 && cartItems[0].shop !== selectedShop.name) {

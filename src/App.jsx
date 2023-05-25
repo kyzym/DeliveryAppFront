@@ -23,8 +23,8 @@ export const App = () => {
 
 /**
  * TODO:
- * redux selectors
  * code modules
  * spinner
  * different images
+ * card styles
  */

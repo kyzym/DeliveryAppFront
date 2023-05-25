@@ -4,27 +4,21 @@ import { v4 as uuidv4 } from 'uuid';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCart } from '../redux/cart/cartSlice';
 
-import {
-  TextField,
-  IconButton,
-  Button,
-  Card,
-  Box,
-  Typography,
-} from '@mui/material';
-import { Add, Remove, Delete } from '@mui/icons-material';
+import { TextField, Button, Box, Typography } from '@mui/material';
+
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { validationRules } from '../helpers/validation';
 import { useCartActions, useTotal } from '../hooks/useCartActions';
 import { createOrder } from '../api/api';
+import { ShoppingCart } from '../components/ShoppingCart/ShoppingCart';
+import { selectCart } from '../redux/cart/cartSelectors';
 
 export const ShoppingCartPage = () => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector(selectCart);
 
-  const { handleUpdateQuantity, handleRemoveFromCart, clearShoppingCart } =
-    useCartActions();
+  const { clearShoppingCart } = useCartActions();
   const total = useTotal();
 
   useEffect(() => {
@@ -39,11 +33,6 @@ export const ShoppingCartPage = () => {
   } = useForm({ mode: 'onChange' });
 
   const onSubmit = async ({ name, email, phone, address }) => {
-    if (cart.length === 0) {
-      toast.error('Your cart is empty. Please add some items.');
-      return;
-    }
-
     const order = {
       id: uuidv4(),
       name,
@@ -117,73 +106,7 @@ export const ShoppingCartPage = () => {
         </form>
       </Box>
 
-      <Box sx={{ flexBasis: '70%' }}>
-        <Typography variant="h4" mb={2}>
-          Shopping Cart
-        </Typography>
-        <Box
-          sx={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-between',
-          }}>
-          {cart.length > 0 ? (
-            cart.map((item) => (
-              <Card
-                sx={{
-                  width: '45%',
-                  marginBottom: 2,
-                  padding: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
-                key={item.id}>
-                <img
-                  src={item.imageUrl}
-                  alt={item.name}
-                  style={{ width: 200, height: 200 }}
-                />
-                <Typography variant="h6">{item.name}</Typography>
-                <Typography>${item.price * item.quantity}</Typography>
-                <Box
-                  sx={{
-                    display: 'flex',
-                  }}>
-                  <IconButton
-                    onClick={() =>
-                      handleUpdateQuantity(item, item.quantity - 1)
-                    }>
-                    <Remove />
-                  </IconButton>
-                  <TextField
-                    style={{ textAlign: 'center', appearance: 'textfield' }}
-                    type="number"
-                    value={item.quantity}
-                    onChange={(e) =>
-                      handleUpdateQuantity(item, Number(e.target.value))
-                    }
-                  />
-                  <IconButton
-                    onClick={() =>
-                      handleUpdateQuantity(item, item.quantity + 1)
-                    }>
-                    <Add />
-                  </IconButton>
-                </Box>
-                <IconButton onClick={() => handleRemoveFromCart(item)}>
-                  <Delete color="error" />
-                </IconButton>
-              </Card>
-            ))
-          ) : (
-            <Typography variant="h5">
-              🛒 Your cart seems to be empty... How about adding some cool
-              stuff? 😊
-            </Typography>
-          )}
-        </Box>
-      </Box>
+      <ShoppingCart cart={cart} />
     </Box>
   );
 };
