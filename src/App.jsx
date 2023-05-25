@@ -20,10 +20,3 @@ export const App = () => {
     </BrowserRouter>
   );
 };
-
-/**
- * TODO:
- * spinner
- * different images
- * card styles
- */
