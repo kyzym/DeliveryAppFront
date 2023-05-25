@@ -2,9 +2,13 @@
 import { IconButton, Card, Box, Typography, TextField } from '@mui/material';
 import { Add, Remove, Delete } from '@mui/icons-material';
 import { useCartActions } from '../../hooks/useCartActions';
+import { CircularProgress } from '@mui/material';
+import { StyledImg } from '../ProductCard/ProductCardStyled';
+import { useState } from 'react';
 
 export const ShoppingCart = ({ cart }) => {
   const { handleUpdateQuantity, handleRemoveFromCart } = useCartActions();
+  const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <Box sx={{ flexBasis: '70%' }}>
       <Typography variant="h4" mb={2}>
@@ -26,12 +30,16 @@ export const ShoppingCart = ({ cart }) => {
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
+                justifyContent: 'space-between',
+                height: '390px',
               }}
               key={item.id}>
-              <img
+              {!imageLoaded && <CircularProgress />}
+              <StyledImg
                 src={item.imageUrl}
                 alt={item.name}
-                style={{ width: 200, height: 200 }}
+                onLoad={() => setImageLoaded(true)}
+                style={imageLoaded ? {} : { display: 'none' }}
               />
               <Typography variant="h6">{item.name}</Typography>
               <Typography>${item.price * item.quantity}</Typography>

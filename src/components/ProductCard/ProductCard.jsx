@@ -8,7 +8,10 @@ import {
 } from '@mui/material';
 import { AddShoppingCart, RemoveShoppingCart } from '@mui/icons-material';
 
-import { StyledProductCard } from './ProductCardStyled';
+import { StyledImg, StyledProductCard } from './ProductCardStyled';
+
+import { useState } from 'react';
+import { CircularProgress } from '@mui/material';
 
 export const ProductCard = ({
   product,
@@ -16,23 +19,23 @@ export const ProductCard = ({
   handleAddToCart,
   handleRemoveFromCart,
 }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <StyledProductCard>
       <CardContent>
         <Typography variant="h5" gutterBottom>
           {product.name}
         </Typography>
-        <img
+        {!imageLoaded && <CircularProgress />}
+        <StyledImg
           src={product.imageUrl}
           alt={product.name}
-          style={{
-            height: '100px',
-            display: 'block',
-            margin: '0 auto',
-          }}
+          onLoad={() => setImageLoaded(true)}
+          style={imageLoaded ? {} : { display: 'none' }}
         />
         <Typography mt={2}>{product.description}</Typography>
-        <Typography mt={1}>{product.price}</Typography>
+        <Typography mt={1}>Price: {product.price}</Typography>
       </CardContent>
       <CardActions>
         {!cartItems.some((item) => item.id === product.id) ? (

@@ -4,6 +4,8 @@ import axios from 'axios';
 import { TextField, Box, Typography, Button, Card } from '@mui/material';
 import { toast } from 'react-toastify';
 import { validationRules } from '../helpers/validation';
+import { CircularProgress } from '@mui/material';
+import { StyledImg } from '../components/ProductCard/ProductCardStyled';
 
 export const HistoryPage = () => {
   const {
@@ -27,6 +29,8 @@ export const HistoryPage = () => {
       console.error(error.message);
     }
   };
+
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <Box sx={{ m: 3 }}>
@@ -52,7 +56,11 @@ export const HistoryPage = () => {
           error={errors.phone ? true : false}
           helperText={errors.phone ? errors.phone.message : ''}
         />
-        <Button variant="contained" color="primary" type="submit">
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          sx={{ mb: '30px' }}>
           Get Orders
         </Button>
       </form>
@@ -81,10 +89,16 @@ export const HistoryPage = () => {
                 gap: '10px',
               }}
               key={item.id}>
-              <img
+              {!imageLoaded && <CircularProgress />}
+              <StyledImg
                 src={item.imageUrl}
                 alt={item.name}
-                style={{ width: '50px', height: '50px', marginRight: '10px' }}
+                onLoad={() => setImageLoaded(true)}
+                style={
+                  imageLoaded
+                    ? { width: 100, height: 100 }
+                    : { display: 'none' }
+                }
               />
               <Typography variant="body1" sx={{ flex: 1 }}>
                 {item.name}

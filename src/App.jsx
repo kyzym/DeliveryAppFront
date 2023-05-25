@@ -23,7 +23,6 @@ export const App = () => {
 
 /**
  * TODO:
- * code modules
  * spinner
  * different images
  * card styles
