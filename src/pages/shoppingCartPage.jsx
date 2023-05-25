@@ -44,8 +44,7 @@ export const ShoppingCartPage = () => {
     };
 
     try {
-      const response = createOrder(order);
-      console.log(response.data);
+      createOrder(order);
       toast.success('All right, please wait for your order! 😊');
       reset();
     } catch (error) {

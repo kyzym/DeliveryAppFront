@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { validationRules } from '../helpers/validation';
 import { CircularProgress } from '@mui/material';
 import { StyledImg } from '../components/ProductCard/ProductCardStyled';
+import { BASE_URL } from '../api/api';
 
 export const HistoryPage = () => {
   const {
@@ -18,10 +19,10 @@ export const HistoryPage = () => {
 
   const onSubmit = async ({ email, phone }) => {
     try {
-      const response = await axios.post(
-        'http://localhost:3001/api/orders/history',
-        { email, phone }
-      );
+      const response = await axios.post(`${BASE_URL}orders/history`, {
+        email,
+        phone,
+      });
       setOrders(response.data);
       reset();
     } catch (error) {
