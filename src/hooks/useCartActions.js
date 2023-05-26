@@ -16,7 +16,7 @@ export const useCartActions = () => {
   }, [dispatch]);
 
   const handleUpdateQuantity = (product, quantity) => {
-    if (quantity >= 0) {
+    if (quantity > 0) {
       dispatch(updateQuantity({ ...product, quantity }));
     }
   };
