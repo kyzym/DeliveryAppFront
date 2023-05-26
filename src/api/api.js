@@ -1,6 +1,6 @@
 import axios from 'axios';
-// export const BASE_URL = 'https://delivery-app-back-iruk.onrender.com/api/';
-export const BASE_URL = 'http://localhost:3001/api/';
+export const BASE_URL = 'https://delivery-app-back-iruk.onrender.com/api/';
+// export const BASE_URL = 'http://localhost:3001/api/';
 
 export const fetchShops = async () => {
   const response = await axios.get(`${BASE_URL}shops`);
