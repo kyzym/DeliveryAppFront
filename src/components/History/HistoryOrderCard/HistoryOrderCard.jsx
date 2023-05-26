@@ -1,33 +1,19 @@
-// OrderCard.js
-import { Card, Typography, Box, CircularProgress } from '@mui/material';
-import { StyledImg } from '../ProductCard/ProductCardStyled';
+import { Typography, CircularProgress } from '@mui/material';
+import { StyledImg } from '../../ProductCard/ProductCardStyled';
+import {
+  StyledHistoryCard,
+  StyledHistoryCardContent,
+} from './HistoryOrderCardStyled';
 
 export const OrderCard = ({ order, imageLoaded, setImageLoaded }) => {
   return (
-    <Card
-      key={order.id}
-      sx={{
-        marginBottom: 2,
-        padding: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}>
+    <StyledHistoryCard key={order.id}>
       <Typography variant="h6" mb={2}>
         Order Date: {new Date(order.date).toLocaleString()}
       </Typography>
 
       {order.items.map((item) => (
-        <Box
-          sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            marginBottom: 1,
-            gap: 2,
-            width: '60%',
-          }}
-          key={item.id}>
+        <StyledHistoryCardContent key={item.id}>
           {!imageLoaded && <CircularProgress />}
           <StyledImg
             src={item.imageUrl}
@@ -45,10 +31,10 @@ export const OrderCard = ({ order, imageLoaded, setImageLoaded }) => {
           <Typography variant="body1" sx={{ marginLeft: 1 }}>
             Total: {item.quantity * item.price}
           </Typography>
-        </Box>
+        </StyledHistoryCardContent>
       ))}
 
       <Typography variant="h6">Total Order Cost: {order.totalCost}</Typography>
-    </Card>
+    </StyledHistoryCard>
   );
 };

@@ -6,7 +6,7 @@ import { Box, Typography } from '@mui/material';
 
 import { fetchOrderHistory } from '../api/api';
 import { OrderForm } from '../components/History/HistoryOrderForm';
-import { OrderCard } from '../components/History/HistoryOrderCard';
+import { OrderCard } from '../components/History/HistoryOrderCard/HistoryOrderCard';
 
 export const HistoryPage = () => {
   const { reset } = useForm({ mode: 'onChange' });

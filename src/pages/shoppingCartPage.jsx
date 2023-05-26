@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form';
 
 import { useCartActions, useTotal } from '../hooks/useCartActions';
 import { createOrder } from '../api/api';
-import { ShoppingCart } from '../components/ShoppingCart/ShoppingCart';
+import { ShoppingCart } from '../components/ShoppingCart/ShoppingCartCard/ShoppingCartCard';
 import { selectCart } from '../redux/cart/cartSelectors';
 import { CartOrderForm } from '../components/ShoppingCart/ShoppingCartForm';
 

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { CardContent, CardActions, Button, Typography } from '@mui/material';
 
 import { StyledShopCard } from './ShopCardStyled';

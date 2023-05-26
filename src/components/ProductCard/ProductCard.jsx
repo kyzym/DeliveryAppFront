@@ -1,17 +1,13 @@
-/* eslint-disable react/prop-types */
-
-import {
-  CardContent,
-  CardActions,
-  IconButton,
-  Typography,
-} from '@mui/material';
+import { CardActions, IconButton, Typography } from '@mui/material';
 import { AddShoppingCart, RemoveShoppingCart } from '@mui/icons-material';
-
-import { StyledImg, StyledProductCard } from './ProductCardStyled';
-
+import {
+  StyledCardContent,
+  StyledCircularProgress,
+  StyledImg,
+  StyledProductCard,
+} from './ProductCardStyled';
 import { useState } from 'react';
-import { CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
 
 export const ProductCard = ({
   product,
@@ -23,20 +19,27 @@ export const ProductCard = ({
 
   return (
     <StyledProductCard>
-      <CardContent>
+      <StyledCardContent>
         <Typography variant="h5" gutterBottom>
           {product.name}
         </Typography>
-        {!imageLoaded && <CircularProgress />}
-        <StyledImg
-          src={product.imageUrl}
-          alt={product.name}
-          onLoad={() => setImageLoaded(true)}
-          style={imageLoaded ? {} : { display: 'none' }}
-        />
+        <Box
+          sx={{
+            height: 200,
+            position: 'relative',
+          }}>
+          {!imageLoaded && <StyledCircularProgress />}
+          <StyledImg
+            src={product.imageUrl}
+            alt={product.name}
+            onLoad={() => setImageLoaded(true)}
+            style={imageLoaded ? {} : { display: 'none' }}
+            sx={{ height: '100%', width: '100%' }}
+          />
+        </Box>
         <Typography mt={2}>{product.description}</Typography>
         <Typography mt={1}>Price: {product.price}</Typography>
-      </CardContent>
+      </StyledCardContent>
       <CardActions>
         {!cartItems.some((item) => item.id === product.id) ? (
           <IconButton
