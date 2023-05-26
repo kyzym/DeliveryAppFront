@@ -58,7 +58,7 @@ export const ShopsPage = () => {
           ))}
       </ShopContainer>
 
-      {selectedShop && (
+      {selectedShop ? (
         <ProductContainer>
           <Typography variant="h4" mb={2} align="center" sx={{ width: '100%' }}>
             {selectedShop.name} Products
@@ -72,6 +72,18 @@ export const ShopsPage = () => {
               handleRemoveFromCart={handleRemoveFromCart}
             />
           ))}
+        </ProductContainer>
+      ) : (
+        <ProductContainer>
+          <Typography
+            variant="h5"
+            mb={2}
+            align="center"
+            sx={{ width: '80%', marginTop: '7%' }}>
+            {
+              "Welcome! Hungry? 😋 Pick a restaurant on the left and let's get that tummy happy!🍔"
+            }
+          </Typography>
         </ProductContainer>
       )}
     </Container>
