@@ -32,17 +32,17 @@ Check out the live version here: [Delivery-App](https://delivery-app-front-xi.ve
 ## 🚀 Getting Started
 
 Clone the repository to your local machine:
-
+```bash
 git clone <https://github.com/kyzym/DeliveryAppFront.git>
-
+```
 Install the project dependencies:
-
+```bash
 npm install
-
+```
 To start the application:
-
+```bash
 npm start
-
+```
 Now, open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 
 ## Backend Repository
