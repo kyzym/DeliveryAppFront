@@ -43,6 +43,7 @@ export const ProductCard = ({
       <CardActions>
         {!cartItems.some((item) => item.id === product.id) ? (
           <IconButton
+            color="primary"
             aria-label="add to cart"
             onClick={() => handleAddToCart(product)}>
             <AddShoppingCart />

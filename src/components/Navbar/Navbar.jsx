@@ -11,8 +11,9 @@ import {
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { StyledLink } from './Navbar.styled';
 import { selectCartContent } from '../../redux/cart/cartSelectors';
+import { MaterialUISwitch } from '../Other/MaterialUISwitch';
 
-export const Navbar = () => {
+export const Navbar = ({ onThemeChange }) => {
   const cartItemCount = useSelector(selectCartContent);
 
   return (
@@ -39,6 +40,11 @@ export const Navbar = () => {
             </Badge>
           </IconButton>
         </StyledLink>
+        <MaterialUISwitch
+          sx={{ m: 1, ml: 3 }}
+          onChange={onThemeChange}
+          defaultChecked
+        />
       </Toolbar>
     </AppBar>
   );

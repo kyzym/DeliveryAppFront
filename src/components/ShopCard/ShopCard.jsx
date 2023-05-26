@@ -1,13 +1,23 @@
-import { CardContent, CardActions, Button, Typography } from '@mui/material';
+import {
+  CardContent,
+  CardActions,
+  Button,
+  Typography,
+  useTheme,
+} from '@mui/material';
 
 import { StyledShopCard } from './ShopCardStyled';
 
 export const ShopCard = ({ shop, selectedShop, handleSelectShop }) => {
+  const theme = useTheme();
+
   return (
     <StyledShopCard
       style={{
         backgroundColor:
-          selectedShop && selectedShop.id === shop.id ? '#cfe8fc' : '',
+          selectedShop && selectedShop.id === shop.id
+            ? theme.palette.action.selected
+            : '',
       }}>
       <CardContent>
         <Typography variant="h5" gutterBottom>
