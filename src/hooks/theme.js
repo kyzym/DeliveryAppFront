@@ -15,7 +15,7 @@ export const useTheme = () => {
     () =>
       createTheme({
         palette: {
-          mode: !darkMode ? 'dark' : 'light',
+          mode: darkMode ? 'dark' : 'light',
         },
       }),
     [darkMode]
