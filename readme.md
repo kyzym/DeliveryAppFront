@@ -5,7 +5,7 @@ Hey there! 👋 Welcome to Delivery-App - a smooth, streamlined platform for all
 
 Built with Vite, React, and Redux, this project boasts an interactive UI that's both user-friendly and efficient. 🎉🎉🎉
 
-<!-- ![DeliveryApp]() -->
+<img width="550" alt="image" src="https://github.com/kyzym/DeliveryAppFront/assets/102521716/16a6bd4d-3a19-4538-ae06-51b2ef0a0439">
 
 ## 🌐 Live Link
 
