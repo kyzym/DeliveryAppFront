@@ -61,7 +61,7 @@ export const HistoryPage = () => {
           variant="contained"
           color="primary"
           type="submit"
-          sx={{ mb: '30px' }}>
+          sx={{ mb: 3 }}>
           Get Orders
         </Button>
       </form>
@@ -77,7 +77,7 @@ export const HistoryPage = () => {
             alignItems: 'center',
           }}>
           <Typography variant="h6" mb={2}>
-            Order Date: {new Date(order.date).toLocaleDateString()}
+            Order Date: {new Date(order.date).toLocaleString()}
           </Typography>
 
           {order.items.map((item) => (
@@ -87,7 +87,8 @@ export const HistoryPage = () => {
                 flexDirection: 'row',
                 alignItems: 'center',
                 marginBottom: 1,
-                gap: '10px',
+                gap: 2,
+                width: '60%',
               }}
               key={item.id}>
               {!imageLoaded && <CircularProgress />}
