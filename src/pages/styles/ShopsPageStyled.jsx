@@ -7,8 +7,11 @@ export const Container = styled(Box)`
 `;
 
 export const ShopContainer = styled(Box)`
-  flex-basis: 20%;
+  width: 250px;
   margin-right: 16px;
+  @media screen and (max-width: 1200px) {
+    flex-basis: 20%;
+  }
 `;
 
 export const ProductContainer = styled(Box)`
@@ -16,4 +19,6 @@ export const ProductContainer = styled(Box)`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  margin-left: auto;
+  margin-right: auto;
 `;
