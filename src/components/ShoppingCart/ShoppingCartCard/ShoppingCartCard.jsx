@@ -39,7 +39,9 @@ export const ShoppingCart = ({ cart }) => {
                   />
                 </StyledImageContainer>
                 <Typography variant="h6">{item.name}</Typography>
-                <Typography>${item.price * item.quantity}</Typography>
+                <Typography>
+                  ${(item.price * item.quantity).toFixed(2)}
+                </Typography>
                 <Box
                   sx={{
                     display: 'flex',
