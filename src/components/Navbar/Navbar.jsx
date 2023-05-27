@@ -21,25 +21,32 @@ export const Navbar = ({ onThemeChange }) => {
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Button color="inherit">
-            <StyledLink to="/">Delivery-app</StyledLink>
+            <StyledLink to="/" style={{ marginLeft: 0 }}>
+              Delivery-app
+            </StyledLink>
           </Button>
         </Typography>
 
-        <Button color="inherit">
-          <StyledLink to="/">Shops</StyledLink>
+        <Button color="inherit" sx={{ mx: 1 }}>
+          <StyledLink to="/" style={{ marginLeft: 0 }}>
+            Shops
+          </StyledLink>
         </Button>
 
-        <Button color="inherit">
-          <StyledLink to="/history">Order History</StyledLink>
+        <Button color="inherit" sx={{ mx: 1 }}>
+          <StyledLink to="/history" style={{ marginLeft: 0 }}>
+            Order History
+          </StyledLink>
         </Button>
 
-        <StyledLink to="/cart">
-          <IconButton color="inherit">
+        <IconButton color="inherit" sx={{ mx: 1 }}>
+          <StyledLink to="/cart" style={{ marginLeft: 0 }}>
             <Badge badgeContent={cartItemCount} color="secondary">
               <ShoppingCartIcon />
             </Badge>
-          </IconButton>
-        </StyledLink>
+          </StyledLink>
+        </IconButton>
+
         <MaterialUISwitch
           sx={{ m: 1, ml: 3 }}
           onChange={onThemeChange}
