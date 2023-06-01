@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { loadCart } from '../redux/cart/cartSlice';
@@ -7,7 +6,6 @@ import { loadCart } from '../redux/cart/cartSlice';
 import { Box, Typography } from '@mui/material';
 
 import { toast } from 'react-toastify';
-import { useForm } from 'react-hook-form';
 
 import { useCartActions, useTotal } from '../hooks/useCartActions';
 import { createOrder } from '../api/api';
@@ -26,11 +24,8 @@ export const ShoppingCartPage = () => {
     dispatch(loadCart());
   }, [dispatch]);
 
-  const { reset } = useForm({ mode: 'onChange' });
-
-  const onSubmit = async ({ name, email, phone, address }) => {
+  const onSubmit = async ({ name, email, phone, address }, reset) => {
     const order = {
-      id: uuidv4(),
       name,
       email,
       phone,
@@ -40,15 +35,15 @@ export const ShoppingCartPage = () => {
     };
 
     try {
-      createOrder(order);
+      await createOrder(order);
       toast.success('All right, please wait for your order! 😊');
       reset();
+      clearShoppingCart();
     } catch (error) {
       console.error(error);
-      toast.error('Something went wrong... 😞');
+      toast.error(`Something went wrong... 😞\n${error.response.data.message}`);
     }
     console.log('Your order: ', order);
-    clearShoppingCart();
   };
 
   return (

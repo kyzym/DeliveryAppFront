@@ -6,13 +6,12 @@ export const CartOrderForm = ({ onSubmit, total }) => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     reset,
+    formState: { errors },
   } = useForm({ mode: 'onChange' });
 
   const handleFormSubmit = (formData) => {
-    onSubmit(formData);
-    reset();
+    onSubmit(formData, reset);
   };
 
   return (
