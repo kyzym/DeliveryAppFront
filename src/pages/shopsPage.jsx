@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectShop } from '../redux/shop/shopSlice';
-import { Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 
 import { fetchShops } from '../api/api';
 import { ShopCard } from '../components/ShopCard/ShopCard';
@@ -47,6 +47,7 @@ export const ShopsPage = () => {
         <Typography variant="h4" mb={2} align="center">
           Shops
         </Typography>
+        {!shops.length && <CircularProgress />}
         {shops &&
           shops.map((shop) => (
             <ShopCard
